@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Pages에 React/정적 틀 올리기 — Jenniespark</title>
+    <meta name="description" content="정적 빌드와 외부 배포 저장소를 맞추는 흐름을 정리합니다." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+KR:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/index-rmTUX7Bp.css" />
+  </head>
+  <body>
+    <div id="root"><div class="siteLayout" id="top"><header class="siteHeader" role="banner"><div class="siteHeader__inner"><a href="../../" class="siteHeader__brand">Jenniespark</a></div></header><div class="siteLayout__body"><aside class="siteSidebar" aria-label="사이트·카테고리"><nav class="sideNav" aria-label="사이트 메뉴"><p class="sideNav__sectionLabel">사이트</p><ul class="sideNav__list"><li><a href="../../" class="sideNav__link ">홈</a></li><li><a href="../../about/" class="sideNav__link ">About</a></li></ul><div class="sideNav__separator" role="separator" aria-hidden="true"></div><p class="sideNav__sectionLabel">카테고리</p><ul class="sideNav__list"><li><a href="../../dev/" class="sideNav__link ">개발</a></li><li><a href="../../it/" class="sideNav__link ">IT</a></li><li><a href="../../trend/" class="sideNav__link ">트렌드</a></li><li><a href="../../knowledge/" class="sideNav__link ">지식</a></li><li><a href="../../finance/" class="sideNav__link ">금융</a></li><li><a href="../../realestate/" class="sideNav__link ">부동산</a></li><li><a href="../../food/" class="sideNav__link ">맛집</a></li></ul></nav></aside><div class="siteLayout__main"><main class="siteLayout__content"><div class="page postDetail"><article><header class="page__hero postDetail__header" aria-labelledby="post-title"><p class="page__meta"><time dateTime="2026-04-01">2026-04-01</time></p><h1 id="post-title" class="page__h1">GitHub Pages에 React/정적 틀 올리기</h1><p class="page__meta postDetail__category"><a class="textLink" href="../../dev/">개발</a><span class="postDetail__sep"> · </span><a class="textLink" href="../../">목록</a></p></header><section class="page__section postDetail__body" aria-label="본문"><div class="postBody markdownBody"><p>이 저장소는 Vite로 스타일만 번들하고, <strong>글은 <code>posts/N.md</code></strong> 한 폴더에 두고 프론트매터 <code>category</code>로 <code>dev</code>·<code>it</code>·<code>trend</code>·<code>knowledge</code>·<code>finance</code>·<code>realestate</code>·<code>food</code> 등을 구분합니다. 공개 URL은 <strong><code>/posts/N/</code></strong> 으로 통일합니다. Actions가 <strong>배포용</strong> 저장소의 <code>gh-pages</code>에 푸시합니다. 소스와 공개가 분리되어 있으면 메인 저장소를 <code>private</code>으로 두기도 쉽습니다.</p>
+<p>배포용 저장소에는 <strong>deploy key(쓰기)</strong> 를 붙이고, CI에는 <strong>비밀 키</strong> 를 시크릿으로 둡니다. <code>external_repository</code> 에 <code>owner/name</code>을 지정하는 방식이 일반적입니다.</p>
+<h2>빌드 루프 (요약)</h2>
+<pre><code class="language-text">npm ci &amp;&amp; npm run build
+# publish_dir: dist
+</code></pre>
+<p>위에서 <code>vite build</code> 가 <strong>CSS 자산</strong>을 만든 뒤, prerender가 마크다운 → HTML 정적 파일을 <code>dist</code>에 씁니다.</p>
+</div></section></article></div></main></div></div><footer class="siteFooter" role="contentinfo"><p class="siteFooter__text">© Jenniespark</p></footer></div></div>
+    <script type="application/json" id="__PAGE_PROPS__">{"page":{"type":"post","data":{"id":"post-1","fileNum":1,"category":"dev","title":"GitHub Pages에 React/정적 틀 올리기","date":"2026-04-01","excerpt":"정적 빌드와 외부 배포 저장소를 맞추는 흐름을 정리합니다.","bodyHtml":"\u003cp>이 저장소는 Vite로 스타일만 번들하고, \u003cstrong>글은 \u003ccode>posts/N.md\u003c/code>\u003c/strong> 한 폴더에 두고 프론트매터 \u003ccode>category\u003c/code>로 \u003ccode>dev\u003c/code>·\u003ccode>it\u003c/code>·\u003ccode>trend\u003c/code>·\u003ccode>knowledge\u003c/code>·\u003ccode>finance\u003c/code>·\u003ccode>realestate\u003c/code>·\u003ccode>food\u003c/code> 등을 구분합니다. 공개 URL은 \u003cstrong>\u003ccode>/posts/N/\u003c/code>\u003c/strong> 으로 통일합니다. Actions가 \u003cstrong>배포용\u003c/strong> 저장소의 \u003ccode>gh-pages\u003c/code>에 푸시합니다. 소스와 공개가 분리되어 있으면 메인 저장소를 \u003ccode>private\u003c/code>으로 두기도 쉽습니다.\u003c/p>\n\u003cp>배포용 저장소에는 \u003cstrong>deploy key(쓰기)\u003c/strong> 를 붙이고, CI에는 \u003cstrong>비밀 키\u003c/strong> 를 시크릿으로 둡니다. \u003ccode>external_repository\u003c/code> 에 \u003ccode>owner/name\u003c/code>을 지정하는 방식이 일반적입니다.\u003c/p>\n\u003ch2>빌드 루프 (요약)\u003c/h2>\n\u003cpre>\u003ccode class=\"language-text\">npm ci &amp;&amp; npm run build\n# publish_dir: dist\n\u003c/code>\u003c/pre>\n\u003cp>위에서 \u003ccode>vite build\u003c/code> 가 \u003cstrong>CSS 자산\u003c/strong>을 만든 뒤, prerender가 마크다운 → HTML 정적 파일을 \u003ccode>dist\u003c/code>에 씁니다.\u003c/p>\n"},"meta":{"title":"GitHub Pages에 React/정적 틀 올리기 — Jenniespark","description":"정적 빌드와 외부 배포 저장소를 맞추는 흐름을 정리합니다."},"active":"","depth":2}}</script>
+    <script type="module" src="../../assets/index-Btel7nfG.js"></script>
+  </body>
+</html>

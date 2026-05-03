@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite base 경로와 자산 URL — Jenniespark</title>
+    <meta name="description" content="프로젝트 페이지에서 JS/CSS 404가 나는 이유와 대응을 짧게 정리합니다." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+KR:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../assets/index-rmTUX7Bp.css" />
+  </head>
+  <body>
+    <div id="root"><div class="siteLayout" id="top"><header class="siteHeader" role="banner"><div class="siteHeader__inner"><a href="../../" class="siteHeader__brand">Jenniespark</a></div></header><div class="siteLayout__body"><aside class="siteSidebar" aria-label="사이트·카테고리"><nav class="sideNav" aria-label="사이트 메뉴"><p class="sideNav__sectionLabel">사이트</p><ul class="sideNav__list"><li><a href="../../" class="sideNav__link ">홈</a></li><li><a href="../../about/" class="sideNav__link ">About</a></li></ul><div class="sideNav__separator" role="separator" aria-hidden="true"></div><p class="sideNav__sectionLabel">카테고리</p><ul class="sideNav__list"><li><a href="../../dev/" class="sideNav__link ">개발</a></li><li><a href="../../it/" class="sideNav__link ">IT</a></li><li><a href="../../trend/" class="sideNav__link ">트렌드</a></li><li><a href="../../knowledge/" class="sideNav__link ">지식</a></li><li><a href="../../finance/" class="sideNav__link ">금융</a></li><li><a href="../../realestate/" class="sideNav__link ">부동산</a></li><li><a href="../../food/" class="sideNav__link ">맛집</a></li></ul></nav></aside><div class="siteLayout__main"><main class="siteLayout__content"><div class="page postDetail"><article><header class="page__hero postDetail__header" aria-labelledby="post-title"><p class="page__meta"><time dateTime="2026-04-10">2026-04-10</time></p><h1 id="post-title" class="page__h1">Vite base 경로와 자산 URL</h1><p class="page__meta postDetail__category"><a class="textLink" href="../../dev/">개발</a><span class="postDetail__sep"> · </span><a class="textLink" href="../../">목록</a></p></header><section class="page__section postDetail__body" aria-label="본문"><div class="postBody markdownBody"><p>GitHub Pages의 <strong>프로젝트</strong> URL은 <code>https://&lt;user&gt;.github.io/&lt;repo&gt;/</code> 형태입니다. 빌드 <code>base: &#39;/&#39;</code> 로 끝나면 <code>index.html</code> 이 <code>/assets/...</code> 를 불러오는데, 이 경로는 <code>github.io</code> <strong>루트</strong>에 있어 404가 나 <strong>흰 화면</strong>이 될 수 있습니다.</p>
+<p><code>base</code> 를 저장소 경로에 맞추거나, <code>base: &#39;./&#39;</code> 같이 <strong>상대 경로</strong> 를 쓰면 자산 URL이 맞게 뜹니다. 팀/저장소가 바뀌면 <code>base</code> 와 Pages 설정을 같이 갱신하세요.</p>
+<blockquote>
+<p>배포 후 <strong>Network</strong> 탭에서 <code>index-*.js</code> / CSS 응답이 <strong>200</strong>인지 먼저 보면 됩니다.</p>
+</blockquote>
+</div></section></article></div></main></div></div><footer class="siteFooter" role="contentinfo"><p class="siteFooter__text">© Jenniespark</p></footer></div></div>
+    <script type="application/json" id="__PAGE_PROPS__">{"page":{"type":"post","data":{"id":"post-2","fileNum":2,"category":"dev","title":"Vite base 경로와 자산 URL","date":"2026-04-10","excerpt":"프로젝트 페이지에서 JS/CSS 404가 나는 이유와 대응을 짧게 정리합니다.","bodyHtml":"\u003cp>GitHub Pages의 \u003cstrong>프로젝트\u003c/strong> URL은 \u003ccode>https://&lt;user&gt;.github.io/&lt;repo&gt;/\u003c/code> 형태입니다. 빌드 \u003ccode>base: &#39;/&#39;\u003c/code> 로 끝나면 \u003ccode>index.html\u003c/code> 이 \u003ccode>/assets/...\u003c/code> 를 불러오는데, 이 경로는 \u003ccode>github.io\u003c/code> \u003cstrong>루트\u003c/strong>에 있어 404가 나 \u003cstrong>흰 화면\u003c/strong>이 될 수 있습니다.\u003c/p>\n\u003cp>\u003ccode>base\u003c/code> 를 저장소 경로에 맞추거나, \u003ccode>base: &#39;./&#39;\u003c/code> 같이 \u003cstrong>상대 경로\u003c/strong> 를 쓰면 자산 URL이 맞게 뜹니다. 팀/저장소가 바뀌면 \u003ccode>base\u003c/code> 와 Pages 설정을 같이 갱신하세요.\u003c/p>\n\u003cblockquote>\n\u003cp>배포 후 \u003cstrong>Network\u003c/strong> 탭에서 \u003ccode>index-*.js\u003c/code> / CSS 응답이 \u003cstrong>200\u003c/strong>인지 먼저 보면 됩니다.\u003c/p>\n\u003c/blockquote>\n"},"meta":{"title":"Vite base 경로와 자산 URL — Jenniespark","description":"프로젝트 페이지에서 JS/CSS 404가 나는 이유와 대응을 짧게 정리합니다."},"active":"","depth":2}}</script>
+    <script type="module" src="../../assets/index-Btel7nfG.js"></script>
+  </body>
+</html>
