@@ -13,11 +13,46 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&family=Noto+Sans+KR:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/index-CaOcbLtQ.css" />
+    <link rel="stylesheet" href="../assets/index-vq-6P6MJ.css" />
   </head>
   <body>
-    <div id="root"><div class="siteLayout" id="top"><header class="siteHeader" role="banner"><div class="siteHeader__inner"><a href="../" class="siteHeader__brand">Jenniespark</a></div></header><div class="siteLayout__body"><aside class="siteSidebar" aria-label="사이트·카테고리"><nav class="sideNav" aria-label="사이트 메뉴"><p class="sideNav__sectionLabel">사이트</p><ul class="sideNav__list"><li><a href="../" class="sideNav__link ">홈</a></li></ul><div class="sideNav__separator" role="separator" aria-hidden="true"></div><p class="sideNav__sectionLabel">카테고리</p><ul class="sideNav__list"><li><a href="../dev/" class="sideNav__link ">개발</a></li><li><a href="../it/" class="sideNav__link ">IT</a></li><li><a href="../trend/" class="sideNav__link ">트렌드</a></li><li><a href="../knowledge/" class="sideNav__link ">지식</a></li><li><a href="../finance/" class="sideNav__link ">금융</a></li><li><a href="../realestate/" class="sideNav__link ">부동산</a></li><li><a href="../food/" class="sideNav__link ">맛집</a></li><li><a href="../book/" class="sideNav__link ">도서</a></li></ul></nav></aside><div class="siteLayout__main"><main class="siteLayout__content"><div class="page page--notFound"><section class="page__hero" aria-labelledby="notfound-title"><h1 id="notfound-title" class="page__h1">404</h1><p class="page__meta">요청한 경로를 찾을 수 없습니다.</p><p class="page__p"><a class="textLink" href="../">홈으로 돌아가기</a></p></section></div></main></div></div><footer class="siteFooter" role="contentinfo"><nav class="siteFooter__nav" aria-label="약관·문의"><a href="../privacy/" class="siteFooter__link">개인정보처리방침</a><span class="siteFooter__sep" aria-hidden="true">·</span><a href="../terms/" class="siteFooter__link">이용약관</a><span class="siteFooter__sep" aria-hidden="true">·</span><a href="../contact/" class="siteFooter__link">문의</a><span class="siteFooter__sep" aria-hidden="true">·</span><a href="../about/" class="siteFooter__link">소개</a></nav><p class="siteFooter__text">© Jenniespark</p></footer></div></div>
+    <div id="root"><div class="siteLayout" id="top"><header class="siteHeader" role="banner"><div class="siteHeader__inner"><a href="../" class="siteHeader__brand">Jenniespark</a></div></header><div class="siteLayout__body"><aside class="siteSidebar" aria-label="사이트·카테고리"><nav class="sideNav" aria-label="사이트 메뉴"><p class="sideNav__sectionLabel">사이트</p><ul class="sideNav__list"><li><a href="../" class="sideNav__link ">홈</a></li></ul><div class="sideNav__separator" role="separator" aria-hidden="true"></div><p class="sideNav__sectionLabel">카테고리</p><ul class="sideNav__list"><li><a href="../dev/" class="sideNav__link ">개발</a></li><li><a href="../it/" class="sideNav__link ">IT</a></li><li><a href="../parenting/" class="sideNav__link ">육아</a></li><li><a href="../trend/" class="sideNav__link ">트렌드</a></li><li><a href="../knowledge/" class="sideNav__link ">지식</a></li><li><a href="../finance/" class="sideNav__link ">금융</a></li><li><a href="../realestate/" class="sideNav__link ">부동산</a></li><li><a href="../food/" class="sideNav__link ">맛집</a></li><li><a href="../book/" class="sideNav__link ">도서</a></li></ul></nav></aside><div class="siteLayout__main"><main class="siteLayout__content"><div class="page page--notFound"><section class="page__hero" aria-labelledby="notfound-title"><h1 id="notfound-title" class="page__h1">404</h1><p class="page__meta">요청한 경로를 찾을 수 없습니다.</p><p class="page__p"><a class="textLink" href="../">홈으로 돌아가기</a></p></section></div></main></div></div><footer class="siteFooter" role="contentinfo"><nav class="siteFooter__nav" aria-label="약관·문의"><a href="../privacy/" class="siteFooter__link">개인정보처리방침</a><span class="siteFooter__sep" aria-hidden="true">·</span><a href="../terms/" class="siteFooter__link">이용약관</a><span class="siteFooter__sep" aria-hidden="true">·</span><a href="../contact/" class="siteFooter__link">문의</a><span class="siteFooter__sep" aria-hidden="true">·</span><a href="../about/" class="siteFooter__link">소개</a></nav><p class="siteFooter__text">© Jenniespark</p></footer></div></div>
+    <script>
+      (() => {
+        const scopes = document.querySelectorAll(".js-search-scope");
+        if (!scopes.length) return;
+        scopes.forEach((scope) => {
+          const input = scope.querySelector(".js-post-search-input");
+          if (!input) return;
+          const shell = scope.nextElementSibling;
+          const list = shell ? shell.querySelector(".js-post-search-list") : null;
+          if (!list) return;
+          const items = Array.from(list.querySelectorAll(".js-post-search-item"));
+          const meta = scope.querySelector(".js-post-search-meta");
+          const empty = shell ? shell.querySelector(".js-post-search-empty") : null;
+          const total = items.length;
+          const run = () => {
+            const q = String(input.value || "").trim().toLowerCase();
+            let visible = 0;
+            items.forEach((item) => {
+              const hay = String(item.getAttribute("data-search-text") || "");
+              const ok = q === "" || hay.includes(q);
+              item.hidden = !ok;
+              if (ok) visible += 1;
+            });
+            if (meta) {
+              meta.textContent = q ? "검색 결과 " + visible + "건" : "전체 " + total + "건";
+            }
+            if (empty) {
+              empty.hidden = visible !== 0;
+            }
+          };
+          input.addEventListener("input", run);
+          run();
+        });
+      })();
+    </script>
     <script type="application/json" id="__PAGE_PROPS__">{"page":{"type":"notFound","data":{},"meta":{"title":"404"},"active":"","depth":1}}</script>
-    <script type="module" src="../assets/index-C9X1nnPc.js"></script>
+    <script type="module" src="../assets/index-mEjJHk4S.js"></script>
   </body>
 </html>

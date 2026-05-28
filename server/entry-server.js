@@ -6,6 +6,7 @@ const FOOTER_COPYRIGHT = "© Jenniespark";
 const CATEGORY_ORDER = [
   "dev",
   "it",
+  "parenting",
   "trend",
   "knowledge",
   "finance",
@@ -16,6 +17,7 @@ const CATEGORY_ORDER = [
 const CATEGORY_LABELS = {
   dev: "개발",
   it: "IT",
+  parenting: "육아",
   trend: "트렌드",
   knowledge: "지식",
   finance: "금융",
@@ -115,30 +117,57 @@ function HomePage({ page }) {
     ] }),
     /* @__PURE__ */ jsxs("section", { className: "page__section page__section--posts", "aria-labelledby": "posts-heading", children: [
       /* @__PURE__ */ jsx("h2", { id: "posts-heading", className: "page__h2 page__h2--section", children: "최근 글" }),
-      /* @__PURE__ */ jsx("div", { className: "page__listShell", children: /* @__PURE__ */ jsx("div", { className: "postList", children: posts.map((post) => /* @__PURE__ */ jsxs("article", { className: "postCard", children: [
-        /* @__PURE__ */ jsx("p", { className: "postCard__date", children: /* @__PURE__ */ jsx("time", { dateTime: post.date, children: post.date }) }),
-        /* @__PURE__ */ jsxs(
-          "a",
+      /* @__PURE__ */ jsxs("div", { className: "page__search js-search-scope", children: [
+        /* @__PURE__ */ jsx(
+          "input",
           {
-            className: "postCard__linkBlock",
-            href: postListHrefFromDepth(depth, post.fileNum),
-            "aria-label": `${post.title} 글 보기`,
-            children: [
-              /* @__PURE__ */ jsx("h2", { className: "postCard__title", children: post.title }),
-              /* @__PURE__ */ jsx("p", { className: "postCard__excerpt", children: post.excerpt })
-            ]
+            className: "page__searchInput js-post-search-input",
+            type: "search",
+            placeholder: "키워드를 검색하세요",
+            "aria-label": "글 검색"
           }
         ),
-        /* @__PURE__ */ jsx("p", { className: "postCard__tags", children: /* @__PURE__ */ jsx(
-          "a",
+        /* @__PURE__ */ jsxs("p", { className: "page__searchMeta js-post-search-meta", children: [
+          "전체 ",
+          posts.length,
+          "건"
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "page__listShell", children: [
+        /* @__PURE__ */ jsx("div", { className: "postList js-post-search-list", children: posts.map((post) => /* @__PURE__ */ jsxs(
+          "article",
           {
-            className: "postCard__catLink",
-            href: `${r}${post.category}/`,
-            "aria-label": `${CATEGORY_LABELS[post.category] || post.category} 카테고리로 이동`,
-            children: /* @__PURE__ */ jsx("span", { className: "tag", children: CATEGORY_LABELS[post.category] || post.category })
-          }
-        ) })
-      ] }, post.id)) }) })
+            className: "postCard js-post-search-item",
+            "data-search-text": `${String(post.title || "").toLowerCase()} ${String(post.excerpt || "").toLowerCase()}`,
+            children: [
+              /* @__PURE__ */ jsx("p", { className: "postCard__date", children: /* @__PURE__ */ jsx("time", { dateTime: post.date, children: post.date }) }),
+              /* @__PURE__ */ jsxs(
+                "a",
+                {
+                  className: "postCard__linkBlock",
+                  href: postListHrefFromDepth(depth, post.fileNum),
+                  "aria-label": `${post.title} 글 보기`,
+                  children: [
+                    /* @__PURE__ */ jsx("h2", { className: "postCard__title", children: post.title }),
+                    /* @__PURE__ */ jsx("p", { className: "postCard__excerpt", children: post.excerpt })
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsx("p", { className: "postCard__tags", children: /* @__PURE__ */ jsx(
+                "a",
+                {
+                  className: "postCard__catLink",
+                  href: `${r}${post.category}/`,
+                  "aria-label": `${CATEGORY_LABELS[post.category] || post.category} 카테고리로 이동`,
+                  children: /* @__PURE__ */ jsx("span", { className: "tag", children: CATEGORY_LABELS[post.category] || post.category })
+                }
+              ) })
+            ]
+          },
+          post.id
+        )) }),
+        /* @__PURE__ */ jsx("p", { className: "page__p page__p--emptyInList js-post-search-empty", hidden: true, children: "검색 결과가 없습니다." })
+      ] })
     ] })
   ] }) });
 }
@@ -291,6 +320,7 @@ function StaticDocPage({ page }) {
 function CategoryPage({ page }) {
   const { data, active, depth } = page;
   const r = rootPrefixFromDepth(depth);
+  const posts = Array.isArray(data.posts) ? data.posts : [];
   return /* @__PURE__ */ jsx(SiteLayout, { rootPrefix: r, active, children: /* @__PURE__ */ jsxs("div", { className: "page", children: [
     /* @__PURE__ */ jsxs("section", { className: "page__hero", "aria-labelledby": "cat-title", children: [
       /* @__PURE__ */ jsx("h1", { id: "cat-title", className: "page__h1", children: data.label }),
@@ -298,21 +328,48 @@ function CategoryPage({ page }) {
     ] }),
     /* @__PURE__ */ jsxs("section", { className: "page__section page__section--posts", "aria-labelledby": "cat-posts", children: [
       /* @__PURE__ */ jsx("h2", { id: "cat-posts", className: "page__h2 page__h2--section", children: "글 목록" }),
-      data.posts.length === 0 ? /* @__PURE__ */ jsx("p", { className: "page__p page__p--emptyInList", children: "이 카테고리에 등록된 글이 없습니다." }) : /* @__PURE__ */ jsx("div", { className: "page__listShell", children: /* @__PURE__ */ jsx("div", { className: "postList", children: data.posts.map((post) => /* @__PURE__ */ jsxs("article", { className: "postCard", children: [
-        /* @__PURE__ */ jsx("p", { className: "postCard__date", children: /* @__PURE__ */ jsx("time", { dateTime: post.date, children: post.date }) }),
-        /* @__PURE__ */ jsxs(
-          "a",
+      /* @__PURE__ */ jsxs("div", { className: "page__search js-search-scope", children: [
+        /* @__PURE__ */ jsx(
+          "input",
           {
-            className: "postCard__linkBlock",
-            href: postListHrefFromDepth(depth, post.fileNum),
-            "aria-label": `${post.title} 글 보기`,
-            children: [
-              /* @__PURE__ */ jsx("h2", { className: "postCard__title", children: post.title }),
-              /* @__PURE__ */ jsx("p", { className: "postCard__excerpt", children: post.excerpt })
-            ]
+            className: "page__searchInput js-post-search-input",
+            type: "search",
+            placeholder: "키워드를 검색하세요",
+            "aria-label": "카테고리 글 검색"
           }
-        )
-      ] }, post.id)) }) })
+        ),
+        /* @__PURE__ */ jsxs("p", { className: "page__searchMeta js-post-search-meta", children: [
+          "전체 ",
+          posts.length,
+          "건"
+        ] })
+      ] }),
+      posts.length === 0 ? /* @__PURE__ */ jsx("p", { className: "page__p page__p--emptyInList", children: "이 카테고리에 등록된 글이 없습니다." }) : /* @__PURE__ */ jsxs("div", { className: "page__listShell", children: [
+        /* @__PURE__ */ jsx("div", { className: "postList js-post-search-list", children: posts.map((post) => /* @__PURE__ */ jsxs(
+          "article",
+          {
+            className: "postCard js-post-search-item",
+            "data-search-text": `${String(post.title || "").toLowerCase()} ${String(post.excerpt || "").toLowerCase()}`,
+            children: [
+              /* @__PURE__ */ jsx("p", { className: "postCard__date", children: /* @__PURE__ */ jsx("time", { dateTime: post.date, children: post.date }) }),
+              /* @__PURE__ */ jsxs(
+                "a",
+                {
+                  className: "postCard__linkBlock",
+                  href: postListHrefFromDepth(depth, post.fileNum),
+                  "aria-label": `${post.title} 글 보기`,
+                  children: [
+                    /* @__PURE__ */ jsx("h2", { className: "postCard__title", children: post.title }),
+                    /* @__PURE__ */ jsx("p", { className: "postCard__excerpt", children: post.excerpt })
+                  ]
+                }
+              )
+            ]
+          },
+          post.id
+        )) }),
+        /* @__PURE__ */ jsx("p", { className: "page__p page__p--emptyInList js-post-search-empty", hidden: true, children: "검색 결과가 없습니다." })
+      ] })
     ] })
   ] }) });
 }
