@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="_MsFziw68jyFhOsm4LeVUUULtCOk8-q90e178DB7XvU" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4686741147738949" crossorigin="anonymous"></script>
+    <title>패션 — 오늘의핫딜</title>
+    <meta name="description" content="패션 핫딜" />
+    <link rel="icon" type="image/png" href="../brand/logo.png" />
+    <link rel="apple-touch-icon" href="../brand/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Outfit:wght@500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/index-D96YwsXu.css" />
+  </head>
+  <body>
+    <div id="root"><link rel="preload" as="image" href="../brand/logo.png"/><div class="siteLayout" id="top"><header class="siteHeader" role="banner"><div class="siteHeader__inner"><a href="../" class="siteHeader__brand" aria-label="오늘의핫딜"><img class="siteHeader__logo" src="../brand/logo.png" alt="" width="40" height="40" decoding="async"/><span class="siteHeader__brandText">오늘의핫딜</span></a><nav class="siteHeader__nav" aria-label="카테고리"><a href="../" class="siteHeader__navLink">홈</a><a href="../baby/" class="siteHeader__navLink">유아동</a><a href="../beauty/" class="siteHeader__navLink">뷰티</a><a href="../living/" class="siteHeader__navLink">생활</a><a href="../food/" class="siteHeader__navLink">식품</a><a href="../fashion/" class="siteHeader__navLink siteHeader__navLink--active" aria-current="page">패션</a><a href="../etc/" class="siteHeader__navLink">기타</a></nav></div></header><div class="siteLayout__body"><div class="siteLayout__main"><main class="siteLayout__content"><div class="page"><section class="page__hero page__hero--cat" aria-labelledby="cat-title"><h1 id="cat-title" class="page__h1">패션</h1><p class="page__meta">이 카테고리의 핫딜을 모았어요.</p></section><section class="page__section page__section--posts" aria-labelledby="cat-posts"><h2 id="cat-posts" class="page__h2 page__h2--section">딜 목록</h2><div class="page__search js-search-scope"><input class="page__searchInput js-post-search-input" type="search" placeholder="키워드로 딜 검색" aria-label="카테고리 핫딜 검색"/><p class="page__searchMeta js-post-search-meta">전체 <!-- -->0<!-- -->건</p></div><p class="page__p page__p--emptyInList">이 카테고리에 등록된 핫딜이 없습니다.</p></section></div></main></div></div><footer class="siteFooter" role="contentinfo"><nav class="siteFooter__nav" aria-label="약관·문의"><a href="../privacy/" class="siteFooter__link">개인정보처리방침</a><span class="siteFooter__sep" aria-hidden="true">·</span><a href="../terms/" class="siteFooter__link">이용약관</a><span class="siteFooter__sep" aria-hidden="true">·</span><a href="../contact/" class="siteFooter__link">문의</a><span class="siteFooter__sep" aria-hidden="true">·</span><a href="../about/" class="siteFooter__link">소개</a></nav><p class="siteFooter__text">© 오늘의핫딜</p></footer></div></div>
+    <script>
+      (() => {
+        const scopes = document.querySelectorAll(".js-search-scope");
+        if (!scopes.length) return;
+        scopes.forEach((scope) => {
+          const input = scope.querySelector(".js-post-search-input");
+          if (!input) return;
+          const shell = scope.nextElementSibling;
+          const list = shell ? shell.querySelector(".js-post-search-list") : null;
+          if (!list) return;
+          const items = Array.from(list.querySelectorAll(".js-post-search-item"));
+          const meta = scope.querySelector(".js-post-search-meta");
+          const empty = shell ? shell.querySelector(".js-post-search-empty") : null;
+          const total = items.length;
+          const run = () => {
+            const q = String(input.value || "").trim().toLowerCase();
+            let visible = 0;
+            items.forEach((item) => {
+              const hay = String(item.getAttribute("data-search-text") || "");
+              const ok = q === "" || hay.includes(q);
+              item.hidden = !ok;
+              if (ok) visible += 1;
+            });
+            if (meta) {
+              meta.textContent = q ? "검색 결과 " + visible + "건" : "전체 " + total + "건";
+            }
+            if (empty) {
+              empty.hidden = visible !== 0;
+            }
+          };
+          input.addEventListener("input", run);
+          run();
+        });
+      })();
+    </script>
+    <script type="application/json" id="__PAGE_PROPS__">{"page":{"type":"category","data":{"categoryId":"fashion","label":"패션","posts":[]},"meta":{"title":"패션 — 오늘의핫딜","description":"패션 핫딜"},"active":"category-fashion","depth":1}}</script>
+    <script type="module" src="../assets/index-BfKBgR3f.js"></script>
+  </body>
+</html>

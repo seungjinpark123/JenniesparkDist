@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /__admin/
 
 Sitemap: https://www.jenniespark.com/sitemap.xml

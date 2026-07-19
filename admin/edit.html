@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>핫딜 수정 — 오늘의핫딜</title>
+    <script>window.__ADMIN_CONFIG__={"github":{"owner":"seungjinpark123","repo":"Jenniespark","branch":"main"},"categories":[{"id":"baby","label":"유아동"},{"id":"beauty","label":"뷰티"},{"id":"living","label":"생활"},{"id":"food","label":"식품"},{"id":"fashion","label":"패션"},{"id":"etc","label":"기타"}]};</script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        font-family: system-ui, sans-serif;
+        color: #1a1a1a;
+        background: #f4f4f5;
+      }
+      body {
+        margin: 0;
+        padding: 1.25rem;
+        max-width: 56rem;
+        margin-inline: auto;
+      }
+      h1 {
+        font-size: 1.25rem;
+        margin: 0 0 0.5rem;
+      }
+      .warn {
+        background: #fef3c7;
+        border: 1px solid #f59e0b;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+      .info {
+        background: #eff6ff;
+        border: 1px solid #93c5fd;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+      .grid {
+        display: grid;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .grid2 {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+      }
+      label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+      input[type="text"],
+      input[type="date"],
+      input[type="url"],
+      input[type="password"],
+      select,
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.5rem 0.6rem;
+        border: 1px solid #d4d4d8;
+        border-radius: 6px;
+        font: inherit;
+      }
+      textarea#excerpt {
+        min-height: 4.5rem;
+        resize: vertical;
+      }
+      #editor {
+        min-height: 280px;
+        background: #fff;
+        border-radius: 8px;
+        border: 1px solid #d4d4d8;
+      }
+      .ql-toolbar.ql-snow {
+        border-radius: 8px 8px 0 0;
+        border-color: #d4d4d8;
+      }
+      .ql-container.ql-snow {
+        border-radius: 0 0 8px 8px;
+        border-color: #d4d4d8;
+        min-height: 240px;
+      }
+      .actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+      }
+      button {
+        padding: 0.55rem 1.1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        background: #c45d7a;
+        color: #fff;
+        cursor: pointer;
+        font: inherit;
+      }
+      button.secondary {
+        background: #fff;
+        color: #1a1a1a;
+        border: 1px solid #d4d4d8;
+      }
+      button#delete {
+        background: #b91c1c;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      #msg,
+      #authMsg {
+        font-size: 0.9rem;
+      }
+      #msg.ok,
+      #authMsg.ok {
+        color: #15803d;
+      }
+      #msg.err,
+      #authMsg.err {
+        color: #b91c1c;
+      }
+      a.site {
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+      }
+      #authGate[hidden],
+      #editorApp[hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>핫딜 수정</h1>
+
+    <div id="authGate" hidden>
+      <p class="info">
+        배포 사이트에서는 GitHub Personal Access Token으로 로그인하세요.
+        (<code>contents:write</code>, 저장소 <code>seungjinpark123/Jenniespark</code>)
+      </p>
+      <label for="ghToken">GitHub PAT</label>
+      <input id="ghToken" type="password" autocomplete="off" placeholder="ghp_…" />
+      <div class="actions">
+        <button type="button" id="loginBtn">로그인</button>
+        <span id="authMsg"></span>
+      </div>
+    </div>
+
+    <div id="editorApp" hidden>
+      <p class="warn" id="modeWarn"></p>
+      <p>
+        <a class="site" id="linkNew" href="./">새 글 작성</a>
+        <a class="site" id="linkHome" href="/">사이트로 돌아가기</a>
+        <button type="button" class="secondary" id="logoutBtn" hidden>로그아웃</button>
+      </p>
+
+      <div class="grid2">
+        <div>
+          <label for="postSelect">수정할 글 선택</label>
+          <select id="postSelect"></select>
+        </div>
+        <button type="button" id="loadPost">불러오기</button>
+      </div>
+
+      <div class="grid" style="margin-top: 1rem">
+        <div>
+          <label for="title">title <span style="color: #b91c1c">*</span></label>
+          <input id="title" type="text" placeholder="딜 제목" required />
+        </div>
+        <div>
+          <label for="date">date <span style="color: #b91c1c">*</span></label>
+          <input id="date" type="date" required />
+        </div>
+        <div>
+          <label for="category">category <span style="color: #b91c1c">*</span></label>
+          <select id="category" required></select>
+        </div>
+        <div>
+          <label for="excerpt">excerpt <span style="color: #b91c1c">*</span></label>
+          <textarea id="excerpt" placeholder="목록·메타용 한 줄 요약" required></textarea>
+        </div>
+        <div style="grid-column: 1 / -1">
+          <label for="dealUrl">dealUrl (핫딜 링크)</label>
+          <input id="dealUrl" type="url" placeholder="https://..." />
+        </div>
+      </div>
+
+      <label>본문 (HTML 에디터)</label>
+      <div id="editor"></div>
+
+      <div class="actions">
+        <button type="button" id="save">저장</button>
+        <button type="button" id="delete">삭제</button>
+        <span id="msg"></span>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+    <script type="module">
+      import * as AdminApi from "/admin/admin-api.js";
+
+      const authGate = document.getElementById("authGate");
+      const editorApp = document.getElementById("editorApp");
+      const msg = document.getElementById("msg");
+      const authMsg = document.getElementById("authMsg");
+      const saveBtn = document.getElementById("save");
+      const deleteBtn = document.getElementById("delete");
+      const loadBtn = document.getElementById("loadPost");
+      const postSelect = document.getElementById("postSelect");
+      const categorySel = document.getElementById("category");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const modeWarn = document.getElementById("modeWarn");
+      let selectedFileNum = null;
+
+      const imagePicker = document.createElement("input");
+      imagePicker.type = "file";
+      imagePicker.accept = "image/png,image/jpeg,image/gif,image/webp";
+      imagePicker.style.display = "none";
+      document.body.appendChild(imagePicker);
+
+      function setMsg(text, ok) {
+        msg.textContent = text;
+        msg.className = ok ? "ok" : "err";
+      }
+
+      function setAuthMsg(text, ok) {
+        authMsg.textContent = text;
+        authMsg.className = ok ? "ok" : "err";
+      }
+
+      function fixLinks(mode) {
+        const neu = document.getElementById("linkNew");
+        const home = document.getElementById("linkHome");
+        if (mode === "local") {
+          neu.href = "/__admin";
+          home.href = "/";
+        } else {
+          neu.href = "./";
+          home.href = "../";
+        }
+      }
+
+      function resetEditorState() {
+        selectedFileNum = null;
+        document.getElementById("title").value = "";
+        document.getElementById("date").value = "";
+        document.getElementById("excerpt").value = "";
+        document.getElementById("dealUrl").value = "";
+        categorySel.value = "";
+        quill.root.innerHTML = "";
+      }
+
+      async function reloadPostOptions() {
+        const list = await AdminApi.listPosts();
+        postSelect.innerHTML = "";
+        (list.posts || []).forEach((p) => {
+          const o = document.createElement("option");
+          o.value = String(p.fileNum);
+          o.textContent =
+            "#" + p.fileNum + " · " + p.title + " · " + p.date + (p.editable ? "" : " [수정불가]");
+          o.disabled = !p.editable;
+          postSelect.appendChild(o);
+        });
+      }
+
+      async function showEditor(mode) {
+        authGate.hidden = true;
+        editorApp.hidden = false;
+        fixLinks(mode);
+        logoutBtn.hidden = mode !== "github";
+        modeWarn.textContent =
+          mode === "local"
+            ? "로컬 개발 서버 모드입니다. format: html 글만 수정할 수 있습니다."
+            : "배포 모드입니다. 저장·삭제 시 GitHub 소스 저장소에 반영되고, Actions 배포 후 사이트에 적용됩니다.";
+        const meta = await AdminApi.getMeta();
+        categorySel.innerHTML = "";
+        (meta.categories || []).forEach((c) => {
+          const o = document.createElement("option");
+          o.value = c.id;
+          o.textContent = c.label + " (" + c.id + ")";
+          categorySel.appendChild(o);
+        });
+        await reloadPostOptions();
+        setMsg("수정할 글을 선택한 뒤 불러오세요.", true);
+      }
+
+      async function boot() {
+        const mode = await AdminApi.detectMode();
+        if (mode === "local") {
+          await showEditor(mode);
+          return;
+        }
+        if (AdminApi.isLoggedIn()) {
+          await showEditor(mode);
+          return;
+        }
+        authGate.hidden = false;
+        editorApp.hidden = true;
+      }
+
+      document.getElementById("loginBtn").addEventListener("click", async () => {
+        const token = document.getElementById("ghToken").value.trim();
+        if (!token) {
+          setAuthMsg("토큰을 입력하세요.", false);
+          return;
+        }
+        AdminApi.setToken(token);
+        try {
+          await AdminApi.listPosts();
+          await showEditor("github");
+        } catch (e) {
+          AdminApi.clearToken();
+          setAuthMsg(String(e.message || e), false);
+        }
+      });
+
+      logoutBtn.addEventListener("click", () => {
+        AdminApi.clearToken();
+        location.reload();
+      });
+
+      const quill = new Quill("#editor", {
+        theme: "snow",
+        modules: {
+          toolbar: [
+            [{ header: [1, 2, 3, false] }],
+            ["bold", "italic", "underline", "strike"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["blockquote", "link", "image"],
+            ["clean"],
+          ],
+        },
+      });
+      const toolbar = quill.getModule("toolbar");
+
+      function pickImageFile() {
+        return new Promise((resolve) => {
+          imagePicker.value = "";
+          imagePicker.onchange = () => {
+            resolve(imagePicker.files && imagePicker.files[0] ? imagePicker.files[0] : null);
+          };
+          imagePicker.click();
+        });
+      }
+
+      toolbar.addHandler("image", async () => {
+        try {
+          setMsg("이미지 선택 대기 중…", true);
+          const file = await pickImageFile();
+          if (!file) {
+            setMsg("이미지 선택이 취소되었습니다.", false);
+            return;
+          }
+          setMsg("이미지 업로드 중…", true);
+          const url = await AdminApi.uploadImage(file);
+          const range = quill.getSelection(true);
+          const index = range ? range.index : quill.getLength();
+          quill.insertEmbed(index, "image", url, "user");
+          quill.setSelection(index + 1, 0, "silent");
+          setMsg("이미지를 본문에 삽입했습니다.", true);
+        } catch (e) {
+          setMsg(String(e.message || e), false);
+        }
+      });
+
+      loadBtn.addEventListener("click", async () => {
+        try {
+          const fileNum = parseInt(postSelect.value, 10);
+          if (!Number.isFinite(fileNum) || fileNum < 1) {
+            setMsg("수정할 글을 먼저 선택하세요.", false);
+            return;
+          }
+          setMsg("글 불러오는 중…", true);
+          const data = await AdminApi.loadPost(fileNum);
+          selectedFileNum = fileNum;
+          document.getElementById("title").value = data.post.title || "";
+          document.getElementById("date").value = data.post.date || "";
+          document.getElementById("excerpt").value = data.post.excerpt || "";
+          document.getElementById("dealUrl").value = data.post.dealUrl || "";
+          categorySel.value = data.post.category || "";
+          quill.root.innerHTML = data.post.html || "";
+          setMsg("불러오기 완료: posts/" + fileNum + ".md", true);
+        } catch (e) {
+          setMsg(String(e.message || e), false);
+        }
+      });
+
+      saveBtn.addEventListener("click", async () => {
+        if (!selectedFileNum) {
+          setMsg("먼저 글을 불러오세요.", false);
+          return;
+        }
+        saveBtn.disabled = true;
+        setMsg("저장 중…", true);
+        try {
+          const data = await AdminApi.updatePost({
+            fileNum: selectedFileNum,
+            title: document.getElementById("title").value.trim(),
+            date: document.getElementById("date").value,
+            category: categorySel.value,
+            excerpt: document.getElementById("excerpt").value.trim(),
+            dealUrl: document.getElementById("dealUrl").value.trim(),
+            html: quill.root.innerHTML.trim(),
+          });
+          setMsg(
+            (data.notice ? data.notice + " " : "") + "저장됨: " + data.relPath,
+            true,
+          );
+        } catch (e) {
+          setMsg(String(e.message || e), false);
+        } finally {
+          saveBtn.disabled = false;
+        }
+      });
+
+      deleteBtn.addEventListener("click", async () => {
+        if (!selectedFileNum) {
+          setMsg("먼저 글을 불러오세요.", false);
+          return;
+        }
+        if (!window.confirm("정말 삭제할까요? posts/" + selectedFileNum + ".md")) {
+          return;
+        }
+        saveBtn.disabled = true;
+        deleteBtn.disabled = true;
+        loadBtn.disabled = true;
+        setMsg("삭제 중…", true);
+        try {
+          const data = await AdminApi.deletePost(selectedFileNum);
+          await reloadPostOptions();
+          resetEditorState();
+          setMsg((data.notice ? data.notice + " " : "") + "삭제됨: " + data.relPath, true);
+        } catch (e) {
+          setMsg(String(e.message || e), false);
+        } finally {
+          saveBtn.disabled = false;
+          deleteBtn.disabled = false;
+          loadBtn.disabled = false;
+        }
+      });
+
+      boot().catch((e) => {
+        authGate.hidden = false;
+        setAuthMsg(String(e.message || e), false);
+      });
+    </script>
+  </body>
+</html>
